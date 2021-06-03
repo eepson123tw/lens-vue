@@ -16,7 +16,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  background-image: url("/bg.jpg");
+  background-image: url("./assets/images/bg.jpg");
   background-attachment: fixed;
   background-position: center;
   background-size: cover;

@@ -20,7 +20,16 @@ module.exports = {
   },
   devServer: {
     compress: true,
-    disableHostCheck: true
+    disableHostCheck: true,
+    proxy: {
+      // 設定代理
+      '/api/*': {
+        target: 'https://vue3-course-api.hexschool.io', // 介面的域名
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: { '^/api': '/api' }
+      }
+    }
   },
   publicPath: process.env.NODE_ENV === 'production'
     ? '/lens-vue/' : '/'

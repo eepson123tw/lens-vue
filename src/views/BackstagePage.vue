@@ -62,7 +62,7 @@
       </table>
     </template>
     <transition name="fade">
-      <Modal v-if="modalShow" :curretItem="propsItem"></Modal>
+      <Modal v-if="modalShow" @close-modal="modelHandler" :show="modalShow" :curretItem="propsItem"></Modal>
     </transition>
   </div>
 </template>
@@ -81,7 +81,7 @@ export default {
       data: [],
       baseurl: 'https://vue3-course-api.hexschool.io/',
       admin: 'eepson123tw',
-      modalShow: true,
+      modalShow: false,
       propsItem: {}
     }
   },

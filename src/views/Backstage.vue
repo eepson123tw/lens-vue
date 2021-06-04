@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { apiPostLoginUser } from '@/api/index'
 export default {
   data () {
     return {
@@ -37,13 +37,8 @@ export default {
   },
   methods: {
     loginHandler () {
-      const baseurl = 'https://vue3-course-api.hexschool.io/'
-      // const admin = 'eepson123tw'
-      console.log(this)
-      axios
-        .post(`${baseurl}admin/signin`, this.user)
+      apiPostLoginUser(this.user)
         .then(res => {
-          console.log(res)
           if (res.data.success === 'false') {
             alert(res.data.message)
             return

@@ -26,8 +26,13 @@
           </tr>
         </thead>
         <tbody id="productList">
-          <tr v-for="item in data" :key="item">
-            <td class="product_title">{{ item.content }}</td>
+          <tr
+            v-for="item in data"
+            :key="item"
+          >
+            <td class="product_title">
+              {{ item.content }}
+            </td>
             <td class="product_defaultWidth">
               {{ item.origin_price }}
             </td>
@@ -62,7 +67,12 @@
       </table>
     </template>
     <transition name="fade">
-      <Modal v-if="modalShow" @close-modal="modelHandler" :show="modalShow" :curretItem="propsItem"></Modal>
+      <Modal
+        v-if="modalShow"
+        :show="modalShow"
+        :curret-item="propsItem"
+        @close-modal="modelHandler"
+      />
     </transition>
   </div>
 </template>
@@ -90,6 +100,9 @@ export default {
       return this.data
     }
   },
+  mounted () {
+    this.getRemoteData()
+  },
   methods: {
     getRemoteData () {
       apiGetProducts().then(res => {
@@ -107,9 +120,6 @@ export default {
       this.modalShow = !this.modalShow
       this.propsItem = item
     }
-  },
-  mounted () {
-    this.getRemoteData()
   }
 }
 </script>

@@ -1,58 +1,109 @@
 <template>
   <div class="modal">
-    <button class="cancelModal" @click="cancelModalHandler">X</button>
+    <button
+      class="cancelModal"
+      @click="cancelModalHandler"
+    >
+      X
+    </button>
     <h1>編輯產品</h1>
     <div class="input title">
       <label for="title">標題</label>
-      <input id="title" type="text" v-model="item['title']" />
+      <input
+        id="title"
+        v-model="item['title']"
+        type="text"
+      >
     </div>
     <div class="input category">
       <label for="category">編輯種類</label>
-      <input id="category" type="text" v-model="item['category']" />
+      <input
+        id="category"
+        v-model="item['category']"
+        type="text"
+      >
     </div>
     <div class="input content">
       <label for="content">編輯內文</label>
-      <input id="content" type="text" v-model="item['content']" />
+      <input
+        id="content"
+        v-model="item['content']"
+        type="text"
+      >
     </div>
     <div class="input description">
       <label for="description">編輯描述</label>
-      <input id="description" type="text" v-model="item['description']" />
+      <input
+        id="description"
+        v-model="item['description']"
+        type="text"
+      >
     </div>
     <div class="input isenabled">
       <label for="isenabled">是否啟用</label>
-      <input id="isenabled" type="checkbox" v-model="item.is_enabled" />
-      <p v-if="item.is_enabled === true">是</p>
-      <p v-else>否</p>
+      <input
+        id="isenabled"
+        v-model="item.is_enabled"
+        type="checkbox"
+      >
+      <p v-if="item.is_enabled === true">
+        是
+      </p>
+      <p v-else>
+        否
+      </p>
     </div>
     <div class="input price">
       <label for="price">售價</label>
-      <input id="price" type="number" v-model.number="item['price']" />
+      <input
+        id="price"
+        v-model.number="item['price']"
+        type="number"
+      >
     </div>
     <div class="input origin_price">
       <label for="origin_price">原價</label>
       <input
         id="origin_price"
-        type="number"
         v-model.number="item['origin_price']"
-      />
+        type="number"
+      >
     </div>
     <div class="input num">
       <label for="num">數量</label>
       <input
         id="num"
+        v-model.number="item['num']"
         type="range"
         min="0"
         max="10"
-        v-model.number="item['num']"
-      />
+      >
       <p>{{ item["num"] }}</p>
     </div>
     <div class="input imageUrl">
-      <img v-if="file === ''" :src="item.imageUrl" alt="" />
-      <img v-else :src="file" alt="" />
-      <input type="file" name="" id="" @change="handleFiles" />
+      <img
+        v-if="file === ''"
+        :src="item.imageUrl"
+        alt=""
+      >
+      <img
+        v-else
+        :src="file"
+        alt=""
+      >
+      <input
+        id=""
+        type="file"
+        name=""
+        @change="handleFiles"
+      >
     </div>
-    <button class="sendSubmit" @click="confirmEdit(item.id)">確認編輯</button>
+    <button
+      class="sendSubmit"
+      @click="confirmEdit(item.id)"
+    >
+      確認編輯
+    </button>
   </div>
 </template>
 

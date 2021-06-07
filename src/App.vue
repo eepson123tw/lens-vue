@@ -1,7 +1,11 @@
 <template>
   <div id="nav">
-    <router-link to="/">Frontstage</router-link>
-    <router-link to="/Backstage">Backstage</router-link>
+    <router-link to="/">
+      Frontstage
+    </router-link>
+    <router-link to="/Backstage">
+      Backstage
+    </router-link>
   </div>
   <router-view />
 </template>

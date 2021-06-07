@@ -5,27 +5,50 @@
     </div>
     <div class="login_input">
       <label for="account">帳號:</label>
-      <input
-        id="account"
-        type="email"
-        autofocus
-        placeholder="XXX@gmail.com"
-        v-model="user.username"
-      />
+      <Form>
+        <Field
+          v-slot="{ field }"
+          v-model="user.username"
+          name="email"
+          :rules="validateEmail"
+        >
+          <input
+            v-bind="field"
+            id="account"
+            placeholder="XXX@gmail.com"
+          >
+        </Field>
+        <ErrorMessage
+          as="span"
+          name="email"
+        />
+      </Form>
     </div>
     <div class="login_input">
       <label for="password">密碼:</label>
-      <input id="password" type="text" v-model="user.password" />
+      <input
+        id="password"
+        v-model="user.password"
+        type="text"
+      >
     </div>
     <div class="login_btn">
-      <button class="login_btnlogin " @click="loginHandler">登入</button>
-      <button class="login_btnCancel ">取消</button>
+      <button
+        class="login_btnlogin "
+        @click="loginHandler"
+      >
+        登入
+      </button>
+      <button class="login_btnCancel ">
+        取消
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import { apiPostLoginUser } from '@/api/index'
+
 export default {
   data () {
     return {
@@ -50,6 +73,18 @@ export default {
         .catch(err => {
           console.dir(err)
         })
+    },
+    validateEmail (value) {
+      // if the field is empty
+      if (!value) {
+        return 'This field is required'
+      }
+      // if the field is not a valid email
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+        return 'This field must be a valid email'
+      }
+      // All is good
+      return true
     }
   }
 }

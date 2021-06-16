@@ -7,7 +7,11 @@
       Backstage
     </router-link>
   </div>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <transition name="fade">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 
 <style lang="scss">
@@ -56,5 +60,21 @@ body {
       color: orangered;
     }
   }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  color: wheat;
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
+  color: aqua;
 }
 </style>

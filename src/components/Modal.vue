@@ -1,26 +1,49 @@
 <template>
   <div class="modal">
-    <button class="cancelModal" @click="cancelModalHandler" />
+    <button
+      class="cancelModal"
+      @click="cancelModalHandler"
+    />
     <h1>編輯產品</h1>
     <div class="input title">
       <label for="title">標題</label>
-      <input id="title" v-model="item['title']" type="text" />
+      <input
+        id="title"
+        v-model="item['title']"
+        type="text"
+      >
     </div>
     <div class="input category">
       <label for="category">編輯種類</label>
-      <input id="category" v-model="item['category']" type="text" />
+      <input
+        id="category"
+        v-model="item['category']"
+        type="text"
+      >
     </div>
     <div class="input content">
       <label for="content">編輯內文</label>
-      <input id="content" v-model="item['content']" type="text" />
+      <input
+        id="content"
+        v-model="item['content']"
+        type="text"
+      >
     </div>
     <div class="input description">
       <label for="description">編輯描述</label>
-      <input id="description" v-model="item['description']" type="text" />
+      <input
+        id="description"
+        v-model="item['description']"
+        type="text"
+      >
     </div>
     <div class="input isenabled">
       <label for="isenabled">是否啟用</label>
-      <input id="isenabled" v-model="item.is_enabled" type="checkbox" />
+      <input
+        id="isenabled"
+        v-model="item.is_enabled"
+        type="checkbox"
+      >
       <p v-if="item.is_enabled === true">
         是
       </p>
@@ -30,7 +53,11 @@
     </div>
     <div class="input price">
       <label for="price">售價</label>
-      <input id="price" v-model.number="item['price']" type="number" />
+      <input
+        id="price"
+        v-model.number="item['price']"
+        type="number"
+      >
     </div>
     <div class="input origin_price">
       <label for="origin_price">原價</label>
@@ -38,7 +65,7 @@
         id="origin_price"
         v-model.number="item['origin_price']"
         type="number"
-      />
+      >
     </div>
     <div class="input num">
       <label for="num">數量</label>
@@ -48,72 +75,91 @@
         type="range"
         min="0"
         max="10"
-      />
+      >
       <p>{{ item["num"] }}</p>
     </div>
     <div class="input imageUrl">
-      <img v-if="file === ''" :src="item.imageUrl" alt="" />
-      <img v-else :src="file" alt="" />
-      <input id="" type="file" name="" @change="handleFiles" />
+      <img
+        v-if="file === ''"
+        :src="item.imageUrl"
+        alt=""
+      >
+      <img
+        v-else
+        :src="file"
+        alt=""
+      >
+      <input
+        id=""
+        type="file"
+        name=""
+        @change="handleFiles"
+      >
     </div>
-    <button class="sendSubmit" @click="confirmEdit(item.id)">
+    <button
+      class="sendSubmit"
+      @click="confirmEdit(item.id)"
+    >
       確認編輯
     </button>
   </div>
 </template>
 
 <script>
-import { apiEditProduct } from "@/api/index";
+import { apiEditProduct } from '@/api/index'
 export default {
   props: {
     curretItem: {
       require: true,
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     modalShow: {
-      type: Boolean
+      type: Boolean,
+      default: null
     }
   },
-  data() {
+  data () {
     return {
       item: this.curretItem,
       showModal: false,
-      file: ""
-    };
+      file: ''
+    }
   },
   methods: {
-    cancelModalHandler() {
-      this.$emit("close-modal", !this.modalShow);
+    cancelModalHandler () {
+      // eslint-disable-next-line vue/require-explicit-emits
+      this.$emit('close-modal', !this.modalShow)
     },
-    handleFiles(element) {
-      const file = element.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
+    handleFiles (element) {
+      const file = element.target.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
       reader.onload = e => {
-        this.file = e.target.result;
-      };
+        this.file = e.target.result
+      }
     },
-    confirmEdit(val) {
+    confirmEdit (val) {
       this.item.is_enabled === true
         ? (this.item.is_enabled = 1)
-        : (this.item.is_enabled = 0);
-      const currentData = this.item;
+        : (this.item.is_enabled = 0)
+      const currentData = this.item
       const putData = {
         data: {
           ...currentData
         }
-      };
+      }
       apiEditProduct(val, putData)
         .then(res => {
-          console.log(res);
-          this.cancelModalHandler();
+          console.log(res)
+          this.cancelModalHandler()
         })
         .catch(err => {
-          console.dir(err);
-        });
+          console.dir(err)
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped>

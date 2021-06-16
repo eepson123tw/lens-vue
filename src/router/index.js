@@ -35,6 +35,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  console.log(to, from, next)
+  // next類似管線，這關過了，交給下一關處理，有暫停處理的效過Ex: 非同步的檢查、需要花時間的處理、轉導頁，如果不加上，頁面不會往下走
+
   window.document.title = to.meta.title
   next()
 })

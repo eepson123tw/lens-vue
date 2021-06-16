@@ -62,7 +62,7 @@ export default {
     loginHandler () {
       apiPostLoginUser(this.user)
         .then(res => {
-          if (res.data.success === 'false') {
+          if (res.data.success === false) {
             alert(res.data.message)
             return
           }
@@ -93,7 +93,7 @@ export default {
 <style scoped>
 .login_container {
   padding: 10px;
-  max-width: 60vh;
+  max-width: 500px;
   margin: 100px auto;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.493);
